@@ -15,7 +15,7 @@ public class CustormerService {
 	@Autowired
 	private CustomerRepository repo;
 	
-	private Persons pers;
+
 	
 	
 	
