@@ -16,14 +16,6 @@ public class CustormerService {
 	private CustomerRepository repo;
 	
 
-	
-	
-	
-	
-	
-	
-	
-
 	public List<Person> getAllData(){	
 		
 		return repo.findAll();
