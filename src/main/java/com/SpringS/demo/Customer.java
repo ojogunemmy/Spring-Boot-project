@@ -26,7 +26,7 @@ public class Customer {
 
 	@RequestMapping(value="/all",method=RequestMethod.GET)
 	public List<Person> user() {
-        serve.toString();
+        
 		return serve.getAllData();
 
 	}
