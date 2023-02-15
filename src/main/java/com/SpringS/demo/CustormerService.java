@@ -20,15 +20,7 @@ public class CustormerService {
 	
 	
 	
-	private List<Person> persons=new ArrayList<Person>(List.of(
-			new Person(1,"Emmanuel",List.of("Java","HTML","JavaScript","Python","CSS","Go")),
-			new Person(2,"Berry",List.of("Java")),
-			new Person(3,"John",List.of("HTML","JavaScript","CSS")),
-			new Person(4,"Victory",List.of("HTML","JavaScript","Python")),
-			new Person(5,"France",List.of("Python","CSS","Go"))
-			
-
-			));
+	
 	
 	
 
