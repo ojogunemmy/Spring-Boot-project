@@ -1,6 +1,5 @@
 package com.SpringS.demo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,6 @@ public class CustormerService {
 
 	public Optional<Person> getOnePerson(int id) {
 		
-
 		return repo.findById(id);
 		
 	}
@@ -44,7 +42,6 @@ public class CustormerService {
 	public void delete(int id) {
 		
 		repo.deleteById(id);
-
 		
 	}
 	

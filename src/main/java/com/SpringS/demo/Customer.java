@@ -87,7 +87,7 @@ public class Customer {
 
 	}
 
-	@RequestMapping(value="/langUser/{id}",method=RequestMethod.POST)
+	@RequestMapping(value="/langUser/{id}",method=RequestMethod.DELETE)
 	public Optional<Person> getSpecific(@PathVariable("id") int id, @RequestBody Language langDel) {
 
 		List<String> data = new ArrayList<>();
