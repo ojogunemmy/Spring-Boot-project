@@ -2,7 +2,18 @@ package com.SpringS.demo;
 
 import java.util.List;
 
+
+
+
 public class Persons {
+	/*
+	 * POJO -Plain old java
+	 * 
+	 * Persons class
+	 * 
+	 * Allow addition of multiple persons into the Person table
+	 * 
+	 */
 	
 	private List<Person> all;
 	

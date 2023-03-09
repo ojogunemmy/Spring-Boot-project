@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,30 +19,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-public class Customer {
+@RequestMapping("/api/v1")
+public class TechController {
+	/*
+	 * 
+	 */
 
 	@Autowired
-	private CustormerService serve;
+	private TechService serve;
 
 	@RequestMapping(value="/all",method=RequestMethod.GET)
 	public List<Person> user() {
-        
 		return serve.getAllData();
 
 	}
 
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String adminAddPerson(@RequestBody Person data) {
+		if(serve.getOnePerson(data.getId()).isPresent()) {
+			return "Null entry";
+		}else {
+			serve.addPerson(data);
+			return 1+" row added";
+		}
 
-		serve.addPerson(data);
-		return 1+" row added";
 
 	}	
 	@RequestMapping(value="/addPersons",method=RequestMethod.POST)
-	public String adminManyPersons(@RequestBody Persons pers) {
-
-		serve.addPersons(pers);
-		return pers.getAll().size()+" row added";
+	public String addManyPersons(@RequestBody Persons pers) {
+		List<Person> valid = new LinkedList<Person>();
+		pers.getAll().forEach(x->{
+			if(serve.getOnePerson(x.getId()).isPresent()) {
+				
+			}else {
+				valid.add(x);
+				
+			}
+		});
+		
+		Persons numValidPersons=new Persons();
+		numValidPersons.setAll(valid);
+		
+		serve.addPersons(numValidPersons);
+		
+		
+		return numValidPersons.getAll().size()+" row added";
 
 	}	
 
@@ -93,7 +114,7 @@ public class Customer {
 		List<String> data = new ArrayList<>();
 		Optional<Person> pinnedID = serve.getOnePerson(id);
 		Person update = pinnedID.get();
-		
+
 		if(langDel.getAction().toString().equals("DELETE")) {
 			List<String> languages = update.getLanguage();
 
@@ -112,10 +133,8 @@ public class Customer {
 
 	}
 
-
-
 	public static void main(String[] args) {
-		SpringApplication.run(Customer.class, args);
+		SpringApplication.run(TechController.class, args);
 	}
 
 

@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustormerService {
+public class TechService {
 
 	
 	
 	@Autowired
-	private CustomerRepository repo;
+	private TechRepository repo;
 	
 
 	public List<Person> getAllData(){	
