@@ -2,14 +2,13 @@ package com.SpringS.demo;
 
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +19,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 @RequestMapping("/api/v1")
+
+
 public class TechController {
 	/*
+	 * Controller class handles all HTTP requests and sends Response
+	 * 
+	 * /api/v1 -- base link to perform CRUD actions
+	 * 
+	 * ****End points****
+	 * /all-- GET Request 
+	 * /add-- POST Request
+	 * /addPersons-- POST Request
+	 * /all/{id} -- GET Request 
+	 * /all/delete/{id} -- DELETE Request
+	 * /update -- PUT Request
+	 * /langUser/{speak} -- GET Request 
+	 * /langUser/{id} -- DELETE Request
 	 * 
 	 */
 
@@ -47,23 +61,14 @@ public class TechController {
 	}	
 	@RequestMapping(value="/addPersons",method=RequestMethod.POST)
 	public String addManyPersons(@RequestBody Persons pers) {
-		List<Person> valid = new LinkedList<Person>();
-		pers.getAll().forEach(x->{
-			if(serve.getOnePerson(x.getId()).isPresent()) {
-				
-			}else {
-				valid.add(x);
-				
-			}
+		LinkedHashMap<String,List<String>> log=serve.addPersons(pers);
+		StringBuilder res= new StringBuilder();
+		
+		log.get("statistics").forEach(line->{
+			res.append(line);
 		});
 		
-		Persons numValidPersons=new Persons();
-		numValidPersons.setAll(valid);
-		
-		serve.addPersons(numValidPersons);
-		
-		
-		return numValidPersons.getAll().size()+" row added";
+		return res.toString();
 
 	}	
 
@@ -85,6 +90,7 @@ public class TechController {
 
 		return  serve.getOnePerson(id).get();
 	}
+	
 	@RequestMapping(value="/langUser/{speak}",method=RequestMethod.GET)
 	public List<Person> getLanguageParticular(@PathVariable String speak) {
 
@@ -110,6 +116,9 @@ public class TechController {
 
 	@RequestMapping(value="/langUser/{id}",method=RequestMethod.DELETE)
 	public Optional<Person> getSpecific(@PathVariable("id") int id, @RequestBody Language langDel) {
+		/*
+		 * To delete a specific language from list of languages tied to an id
+		 */
 
 		List<String> data = new ArrayList<>();
 		Optional<Person> pinnedID = serve.getOnePerson(id);

@@ -5,5 +5,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TechRepository extends JpaRepository<Person, Integer> {
-
+/*
+ * CRUD actions 
+ * 
+ * for Querying the database 
+ */
 }
