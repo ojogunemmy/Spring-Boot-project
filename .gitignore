@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-demo/src/main/resources/application.properties
+/demo/src/main/resources/
 
 
 ### STS ###
@@ -32,6 +32,7 @@ demo/src/main/resources/application.properties
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+/demo/src/main/resources/
 
 ### VS Code ###
 .vscode/
